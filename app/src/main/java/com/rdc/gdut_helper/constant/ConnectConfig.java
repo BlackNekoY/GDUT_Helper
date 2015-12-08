@@ -8,6 +8,7 @@ public class ConnectConfig {
     public static String cookie;
 
 
+
     public static class WelcomePage {
 
         public final static String PATH_WELCOME = "/default2.aspx";

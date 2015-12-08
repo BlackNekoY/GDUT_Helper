@@ -9,6 +9,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.rdc.gdut_helper.net.BaseRunnable;
+import com.rdc.gdut_helper.utils.L;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
@@ -34,6 +35,6 @@ public class NetWorkService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-
+        L.e("");
     }
 }
