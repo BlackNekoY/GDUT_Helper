@@ -4,4 +4,4 @@
 
 ![图片的替代文字](https://raw.githubusercontent.com/BlackNekoY/GDUT_Helper/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
-爬了广工的教务系统，取了自己认为比较有用的一些功能，现在实现的有查成绩，查考试时间，修改密码。还未实现的是课程表，个人资料。
+爬了广工的教务系统，取了自己认为比较有用的一些功能，现在实现的有查成绩，查考试时间，修改密码。还未实现的是课程表，个人资料。开源库用的不多，网络操作自己写的所以代码写的有点乱...以后或许会使用MVP或者MVVM重构该项目。
