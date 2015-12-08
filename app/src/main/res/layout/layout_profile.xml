@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.rdc.gdut_helper.view.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:background="@drawable/bg_profile"
+    android:clickable="true"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <com.rdc.gdut_helper.view.CircleImageView
+            android:id="@+id/iv_head"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_account_circle_white_48dp" />
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="徐越"
+            android:textColor="@color/colorText"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tv_stu_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="3113006193"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/colorText"
+            android:textSize="14sp" />
+
+
+
+    </LinearLayout>
+</com.rdc.gdut_helper.view.SquareRelativeLayout>

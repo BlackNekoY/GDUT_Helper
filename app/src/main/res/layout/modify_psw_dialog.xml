@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <!--<android.support.design.widget.TextInputLayout
+            android:id="@+id/inputlayout_stu_num"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="3dp">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:ellipsize="end"
+                android:hint="学号"
+                android:inputType="number"
+                android:numeric="integer"
+                android:paddingLeft="10dp"
+                android:paddingRight="3dp"
+                android:singleLine="true"
+                android:textSize="14sp" />
+
+        </android.support.design.widget.TextInputLayout>
+-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputlayout_old_psw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/inputlayout_stu_num"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="3dp">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="原密码"
+                android:inputType="textPassword"
+                android:maxLength="16"
+                android:paddingLeft="10dp"
+                android:paddingRight="3dp"
+                android:password="true"
+                android:singleLine="true"
+                android:textSize="14sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputlayout_new_psw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/inputlayout_stu_psw"
+            android:layout_below="@id/inputlayout_old_psw"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="3dp">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="新密码"
+                android:inputType="textPassword"
+                android:maxLength="16"
+                android:paddingLeft="10dp"
+                android:paddingRight="3dp"
+                android:password="true"
+                android:singleLine="true"
+                android:textSize="14sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputlayout_repeat_psw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/inputlayout_stu_psw"
+            android:layout_below="@id/inputlayout_new_psw"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="3dp">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="重复密码"
+                android:inputType="textPassword"
+                android:maxLength="16"
+                android:paddingLeft="10dp"
+                android:paddingRight="3dp"
+                android:password="true"
+                android:singleLine="true"
+                android:textSize="14sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/inputlayout_repeat_psw"
+            android:layout_below="@id/inputlayout_repeat_psw"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="?attr/colorAccent"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</RelativeLayout>

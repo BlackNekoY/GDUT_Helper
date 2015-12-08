@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#435a62</color>
+    <color name="colorPrimaryDark">#435a62</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorRipple">#60ffffff</color>
+    <color name="colorText">#deffffff</color>
+
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+
+    <color name="divider">#B6B6B6</color>
+
+    <color name="icon">#FFFFFF</color>
+    <color name="item_pressed_color">#e0e0e0</color>
+
+    <!--<color name="colorProfile">#2a4b7e</color>
+    <color name="colorSchedule">#2a4b7e</color>
+    <color name="colorCourseScore">#547eba</color>
+    <color name="colorLevelScore">#547eba</color>
+    <color name="colorTestTime">#5e6e7e</color>
+    <color name="colorSetting">#5e6e7e</color>
+    <color name="colorProducer">#90a4ae</color>-->
+
+    <color name="colorProfile">#435a62</color>
+    <color name="colorSchedule">#435a62</color>
+    <color name="colorCourseScore">#90a4ad</color>
+    <color name="colorLevelScore">#5f7d88</color>
+    <color name="colorTestTime">#4cd0df</color>
+    <color name="colorSetting">#80dee8</color>
+    <color name="colorProducer">#8080dee8</color>
+
+</resources>

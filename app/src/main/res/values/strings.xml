@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">广工教务小助手</string>
+    <string name="common">通用</string>
+    <string name="remember_password">记住密码</string>
+    <string name="change_theme">切换主题</string>
+    <string name="about">关于</string>
+    <string name="github_project">Github开源项目</string>
+    <string name="open_source">开源项目许可协议</string>
+    <string name="developer">RDC@徐越</string>
+    <string name="action_settings">设置</string>
+    <string name="settings">设置</string>
+    <string name="cancel">取消</string>
+    <string name="login">登录</string>
+    <string name="schedule">课程表</string>
+    <string name="modify_password">修改密码</string>
+    <string name="test_detail">课程考试</string>
+    <string name="course_score">课程考试成绩</string>
+    <string name="level_score">等级考试成绩</string>
+    <string name="has_login">已登录</string>
+    <string name="has_not_login">未登录</string>
+
+    <string-array name="year_array">
+        <item>学年</item>
+        <item>2001-2002</item>
+        <item>2002-2003</item>
+        <item>2003-2004</item>
+        <item>2004-2005</item>
+        <item>2005-2006</item>
+        <item>2006-2007</item>
+        <item>2007-2008</item>
+        <item>2008-2009</item>
+        <item>2009-2010</item>
+        <item>2010-2011</item>
+        <item>2011-2012</item>
+        <item>2012-2013</item>
+        <item>2013-2014</item>
+        <item>2014-2015</item>
+        <item>2015-2016</item>
+    </string-array>
+
+    <string-array name="term_array">
+        <item>学期</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+</resources>

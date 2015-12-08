@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/status_view" />
+
+    <include layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/SettingCategoryTextStyle"
+                android:text="@string/common" />
+
+            <View style="@style/SettingCategoryDividerStyle" />
+
+            <RelativeLayout
+                android:id="@+id/rl_remember"
+                style="@style/SettingItemLayoutStyle">
+
+                <TextView
+                    style="@style/SettingTitleTextStyle"
+                    android:text="@string/remember_password" />
+
+                <android.support.v7.widget.SwitchCompat style="@style/SettingWidgetStyle" />
+
+            </RelativeLayout>
+
+            <View style="@style/SettingItemDividerStyle" />
+
+            <RelativeLayout
+                android:id="@+id/rl_modify_password"
+                style="@style/SettingItemLayoutStyle">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/SettingTitleTextStyle"
+                        android:text="@string/modify_password" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <View style="@style/SettingItemDividerStyle" />
+
+
+
+            <TextView
+                style="@style/SettingCategoryTextStyle"
+                android:text="@string/about" />
+
+            <View style="@style/SettingCategoryDividerStyle" />
+
+            <RelativeLayout
+                android:id="@+id/rl_github_project"
+                style="@style/SettingItemLayoutStyle">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/SettingTitleTextStyle"
+                        android:text="@string/github_project" />
+
+                    <TextView
+                        style="@style/SettingSummaryTextStyle"
+                        android:text="URL" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <View style="@style/SettingItemDividerStyle" />
+
+            <RelativeLayout
+                android:id="@+id/rl_open_source"
+                style="@style/SettingItemLayoutStyle">
+
+                <TextView
+                    style="@style/SettingTitleTextStyle"
+                    android:text="@string/open_source" />
+            </RelativeLayout>
+
+            <View style="@style/SettingItemDividerStyle" />
+
+
+            <RelativeLayout
+                android:id="@+id/rl_developer"
+                style="@style/SettingItemLayoutStyle">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/SettingTitleTextStyle"
+                        android:text="@string/developer" />
+
+                    <TextView
+                        style="@style/SettingSummaryTextStyle"
+                        android:text="1.0" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

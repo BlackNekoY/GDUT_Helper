@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/status_view"/>
+    <include layout="@layout/toolbar" />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:elevation="10dp"
+                android:gravity="center"
+                android:minHeight="150dp">
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spn_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="27dp"
+                    app:popupTheme="@style/Theme.AppCompat.Light"
+                    app:theme="@style/Theme.AppCompat" />
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spn_term"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/spn_year"
+                    android:gravity="center"
+                    app:popupTheme="@style/Theme.AppCompat.Light"
+                    app:theme="@style/Theme.AppCompat" />
+
+                <RadioGroup
+                    android:id="@+id/rg_query_way"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/spn_year"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/rb1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:text="按学期查询"
+                        android:textSize="14sp"
+                        app:buttonTint="?attr/colorAccent"
+                        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/rb2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:text="按学年查询"
+                        android:textSize="14sp"
+                        app:buttonTint="?attr/colorAccent"
+                        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/rb3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:text="在校成绩查询"
+                        android:textSize="14sp"
+                        app:buttonTint="?attr/colorAccent"
+                        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_search_white_24dp"
+            app:backgroundTint="?attr/colorAccent"
+            app:fabSize="normal"
+            app:layout_anchor="@id/rl_filter"
+            app:layout_anchorGravity="bottom|right|end" />
+    </android.support.design.widget.CoordinatorLayout>
+
+
+</LinearLayout>
+
