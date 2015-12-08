@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.rdc.gdut_helper.R;
+import com.rdc.gdut_helper.app.GDUTApplication;
 
 /**
  * Created by blackwhite on 15-12-7.
@@ -50,6 +51,10 @@ public class ToolbarActivity extends BaseActivity {
 
     public void setTitle(int resId) {
         mToolbar.setTitle(resId);
+    }
+
+    protected boolean hasLogin() {
+        return GDUTApplication.hasLogin;
     }
 
     @Override

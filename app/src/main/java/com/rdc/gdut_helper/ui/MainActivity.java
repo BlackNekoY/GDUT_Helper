@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.rdc.gdut_helper.R;
 import com.rdc.gdut_helper.app.GDUTApplication;
+import com.rdc.gdut_helper.constant.ConnectConfig;
 import com.rdc.gdut_helper.net.BaseRunnable;
 import com.rdc.gdut_helper.net.CheckCodeRunnable;
 import com.rdc.gdut_helper.net.LoginRunnable;
@@ -33,9 +34,6 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends ToolbarActivity implements View.OnClickListener {
 
-    private ExecutorService mThreadPool = Executors.newFixedThreadPool(5);
-    private LoginView mLoginView;
-    private AlertDialog mLoginDialog;
     private MenuItem mMenuItem;
     private long mExitTime;
 
@@ -54,8 +52,8 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.login_status:
-                if (!GDUTApplication.hasLogin) {
-                    initLoginDialog();
+                if (!hasLogin()) {
+                    launchActivity(LoginActivity.class, LoginActivity.REQUEST_CODE);
                 }
                 break;
         }
@@ -96,9 +94,8 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
 
     private void refreshLoginStatus() {
         if (mMenuItem != null) {
-            mMenuItem.setTitle(GDUTApplication.hasLogin ? R.string.has_login : R.string.has_not_login);
+            mMenuItem.setTitle(hasLogin() ? R.string.has_login : R.string.has_not_login);
         }
-
     }
 
     private void startRefreshService() {
@@ -109,33 +106,6 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
 
     private void stopRefreshService() {
         GDUTApplication.hasLogin = false;
-    }
-
-
-    private void loadWelcomePage() {
-        mThreadPool.execute(new WelcomePageRunnable(new WelcomePageCallback()));
-    }
-
-    private void initLoginDialog() {
-        loadWelcomePage();
-        mLoginView = new LoginView(this);
-        mLoginView.setListener(new LoginViewListener());
-        mLoginDialog = new AlertDialog.Builder(this)
-                .setView(mLoginView)
-                .setPositiveButton(R.string.login, null)
-                .setNegativeButton(R.string.cancel, null).setCancelable(false).create();
-        mLoginDialog.show();
-        mLoginDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mLoginView.isMsgComplete()) {
-                    ProgressDialogInflater.showProgressDialog(MainActivity.this, "登录中...");
-                    mThreadPool.execute(new LoginRunnable(mLoginView.getStuNumber(), mLoginView.getStuPassword(), mLoginView.getCheckCode(), new LoginCallback()));
-                } else {
-                    mLoginView.showErrorText("信息不完整");
-                }
-            }
-        });
     }
 
     private void initListener() {
@@ -156,17 +126,34 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_profile:
+                if (hasLogin()) {
+                }
                 break;
             case R.id.rl_schedule:
+                if (!hasLogin()) {
+
+                }
                 break;
             case R.id.rl_course_score:
-                launchActivity(CourseScoreActivity.class);
+                if (hasLogin()) {
+                    launchActivity(CourseScoreActivity.class);
+                } else {
+                    launchActivity(LoginActivity.class, LoginActivity.REQUEST_CODE);
+                }
                 break;
             case R.id.rl_level_score:
-                launchActivity(LevelScoreActivity.class);
+                if (hasLogin()) {
+                    launchActivity(LevelScoreActivity.class);
+                } else {
+                    launchActivity(LoginActivity.class, LoginActivity.REQUEST_CODE);
+                }
                 break;
             case R.id.rl_test_time:
-                launchActivity(TestDetailActivity.class);
+                if (hasLogin()) {
+                    launchActivity(TestDetailActivity.class);
+                } else {
+                    launchActivity(LoginActivity.class, LoginActivity.REQUEST_CODE);
+                }
                 break;
             case R.id.rl_setting:
                 launchActivity(SettingActivity.class);
@@ -174,87 +161,17 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
         }
     }
 
-    private class LoginViewListener implements LoginView.LoginViewClickListener {
-
-        @Override
-        public void getCheckCode() {
-            mThreadPool.execute(new CheckCodeRunnable(new CheckCodeCallBack()));
-        }
-    }
-
-    private class WelcomePageCallback implements BaseRunnable.TaskCallback {
-
-        @Override
-        public void onResult(boolean isConnected, Bundle data) {
-            if (isConnected) {
-                mThreadPool.execute(new CheckCodeRunnable(new CheckCodeCallBack()));
-            } else {
-
-            }
-        }
-    }
-
-    private class CheckCodeCallBack implements BaseRunnable.TaskCallback {
-        @Override
-        public void onResult(final boolean isConnected, final Bundle data) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (isConnected) {
-                        Bitmap bitmap = data.getParcelable("bitmap");
-                        mLoginView.setCheckCodeImage(bitmap);
-                    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case LoginActivity.REQUEST_CODE:
+                refreshLoginStatus();
+                if (hasLogin()) {
+                    startRefreshService();
                 }
-            });
+                break;
         }
-    }
-
-    private class LoginCallback implements BaseRunnable.TaskCallback {
-        @Override
-        public void onResult(final boolean isConnected, final Bundle data) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (isConnected) {
-                        L.e("LoginSucceed");
-                        GDUTApplication.stuNum = mLoginView.getStuNumber();
-                        GDUTApplication.stuPsw = mLoginView.getStuPassword();
-                        mLoginDialog.dismiss();
-                        mLoginView = null;
-                        mThreadPool.execute(new MainPageRunnable(new MainPageCallback()));
-
-                    } else {
-                        L.e("LoginFailed");
-                        String reason = data.getString("reason");
-                        ProgressDialogInflater.dismiss();
-                        mLoginView.showErrorText(reason);
-                        mMenuItem.setTitle(R.string.has_not_login);
-                        mThreadPool.execute(new WelcomePageRunnable(new WelcomePageCallback()));
-                    }
-                }
-            });
-
-        }
-    }
-
-    private class MainPageCallback implements BaseRunnable.TaskCallback {
-
-        @Override
-        public void onResult(final boolean isConnected, Bundle data) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    ProgressDialogInflater.dismiss();
-                    if (isConnected) {
-                        GDUTApplication.hasLogin = true;
-                        startRefreshService();
-                    } else {
-                        GDUTApplication.hasLogin = false;
-                    }
-                    refreshLoginStatus();
-                }
-            });
-        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

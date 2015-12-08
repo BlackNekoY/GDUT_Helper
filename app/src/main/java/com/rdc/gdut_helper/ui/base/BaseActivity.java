@@ -1,5 +1,6 @@
 package com.rdc.gdut_helper.ui.base;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -53,8 +54,13 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void launchActivity(Class clazz) {
-        Intent intent = new Intent(this,clazz);
+        Intent intent = new Intent(this, clazz);
         startActivity(intent);
+    }
+
+    protected void launchActivity(Class clazz,int requestCode) {
+        Intent intent = new Intent(this, clazz);
+        startActivityForResult(intent, requestCode);
     }
 
 }

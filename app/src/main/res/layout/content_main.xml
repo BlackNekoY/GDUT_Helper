@@ -53,13 +53,18 @@
 
             </LinearLayout>
 
-            <com.rdc.gdut_helper.view.SquareRelativeLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_producer"
-                android:clickable="true">
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="此处应有鸡汤"
+                android:textColor="@color/secondary_text"
+                android:textSize="14sp">
 
-            </com.rdc.gdut_helper.view.SquareRelativeLayout>
+            </TextView>
         </LinearLayout>
 
     </ScrollView>

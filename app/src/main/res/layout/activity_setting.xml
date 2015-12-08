@@ -83,7 +83,7 @@
 
                     <TextView
                         style="@style/SettingSummaryTextStyle"
-                        android:text="URL" />
+                        android:text="@string/project_url" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -117,7 +117,7 @@
 
                     <TextView
                         style="@style/SettingSummaryTextStyle"
-                        android:text="1.0" />
+                        android:text="version 1.0" />
                 </LinearLayout>
 
             </RelativeLayout>

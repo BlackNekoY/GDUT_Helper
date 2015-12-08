@@ -1,6 +1,8 @@
 package com.rdc.gdut_helper.ui;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
@@ -12,6 +14,7 @@ import com.rdc.gdut_helper.R;
 import com.rdc.gdut_helper.app.GDUTApplication;
 import com.rdc.gdut_helper.net.BaseRunnable;
 import com.rdc.gdut_helper.net.ModifyPasswordRunnable;
+import com.rdc.gdut_helper.service.RefreshService;
 import com.rdc.gdut_helper.ui.base.ToolbarActivity;
 import com.rdc.gdut_helper.utils.ProgressDialogInflater;
 import com.rdc.gdut_helper.utils.SnackbarUtil;
@@ -37,6 +40,7 @@ public class SettingActivity extends ToolbarActivity implements View.OnClickList
 
         $(R.id.rl_remember).setOnClickListener(this);
         $(R.id.rl_modify_password).setOnClickListener(this);
+        $(R.id.rl_github_project).setOnClickListener(this);
     }
 
 
@@ -54,9 +58,39 @@ public class SettingActivity extends ToolbarActivity implements View.OnClickList
                 GDUTApplication.isRemember = mSwitchRemeber.isChecked();
                 break;
             case R.id.rl_modify_password:
-                modifyPassword();
+                if (hasLogin()) {
+                    modifyPassword();
+                } else {
+                    launchActivity(LoginActivity.class, LoginActivity.REQUEST_CODE);
+                }
+                break;
+            case R.id.rl_github_project:
+                viewProjectUrl();
                 break;
         }
+    }
+
+    private void viewProjectUrl() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.project_url)));
+        startActivity(intent);
+    }
+
+    private void startRefreshService() {
+        Intent intent = new Intent(this, RefreshService.class);
+        intent.setAction(RefreshService.ACTION_REFRESH_MAIN_PAGE);
+        startService(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case LoginActivity.REQUEST_CODE:
+                if (hasLogin()) {
+                    startRefreshService();
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void modifyPassword() {

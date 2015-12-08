@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
+import com.rdc.gdut_helper.R;
+
 public class ProgressDialogInflater {
 
     private static final int DISMISS = 1;
@@ -29,8 +31,16 @@ public class ProgressDialogInflater {
         dialog.show();
     }
 
+    public static void setMessage(CharSequence message) {
+        if(dialog != null) {
+            dialog.setMessage(message);
+        }
+    }
+
     public static void dismiss() {
-        handler.sendEmptyMessageDelayed(DISMISS,500);
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 }
 

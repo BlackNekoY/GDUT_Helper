@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:paddingBottom="30dp"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="30dp">
+    android:orientation="vertical">
 
+    <include layout="@layout/status_view"/>
+    <include layout="@layout/toolbar"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_gravity="center"
+        android:padding="16dp">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/inputlayout_stu_num"
@@ -85,6 +84,16 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/inputlayout_check_code"
+            android:layout_alignLeft="@id/inputlayout_check_code"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="16dp"
+            android:text="@string/login"/>
+
         <ImageView
             android:id="@+id/iv_checkcode"
             android:layout_width="90dp"
@@ -99,6 +108,7 @@
         <TextView
             android:id="@+id/tv_change_checkcode"
             android:layout_width="wrap_content"
+            android:padding="15dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/iv_checkcode"
@@ -109,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/inputlayout_check_code"
-            android:layout_below="@id/tv_change_checkcode"
+            android:layout_below="@id/btn_login"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="8dp"
             android:gravity="center"
@@ -118,4 +128,4 @@
             android:visibility="gone" />
 
     </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

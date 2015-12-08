@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#435a62</color>
-    <color name="colorPrimaryDark">#435a62</color>
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#3f51b5</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorRipple">#60ffffff</color>
     <color name="colorText">#deffffff</color>
@@ -22,12 +22,11 @@
     <color name="colorSetting">#5e6e7e</color>
     <color name="colorProducer">#90a4ae</color>-->
 
-    <color name="colorProfile">#435a62</color>
-    <color name="colorSchedule">#435a62</color>
-    <color name="colorCourseScore">#90a4ad</color>
-    <color name="colorLevelScore">#5f7d88</color>
-    <color name="colorTestTime">#4cd0df</color>
-    <color name="colorSetting">#80dee8</color>
-    <color name="colorProducer">#8080dee8</color>
+    <color name="colorProfile">#37474f</color>
+    <color name="colorSchedule">#455a64</color>
+    <color name="colorCourseScore">#546e7a</color>
+    <color name="colorLevelScore">#607d8b</color>
+    <color name="colorTestTime">#78909c</color>
+    <color name="colorSetting">#90a4ae</color>
 
 </resources>
