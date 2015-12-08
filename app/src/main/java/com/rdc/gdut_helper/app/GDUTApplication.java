@@ -30,11 +30,6 @@ public class GDUTApplication extends Application {
     }
 
     public static void saveSettings() {
-        if(isRemember)  {
-            L.e("true");
-        }else {
-            L.e("false");
-        }
         SharedPreferences.Editor editor = sp.edit();
         if (isRemember) {
             editor.putString("student_number", stuNum);

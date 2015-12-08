@@ -5,10 +5,14 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Binder;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.rdc.gdut_helper.app.GDUTApplication;
+import com.rdc.gdut_helper.constant.ConnectConfig;
 import com.rdc.gdut_helper.net.BaseRunnable;
+import com.rdc.gdut_helper.net.MainPageRunnable;
 import com.rdc.gdut_helper.utils.L;
 
 import java.util.concurrent.BlockingQueue;
@@ -22,11 +26,54 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Created by blackwhite on 15-12-7.
  */
-public class RefreshService extends Service {
+public class RefreshService extends IntentService {
 
-    @Nullable
+    private static final String TAG = "RefreshService";
+    public static final String ACTION_REFRESH_MAIN_PAGE = "action_refresh_main_page";
+    private MainPageRunnable mRunnable;
+    private static final long DEFAULT_REFRESH_TIME = 30 * 1000;
+
+    /**
+     * Creates an IntentService.  Invoked by your subclass's constructor.
+     *
+     * @param name Used to name the worker thread, important only for debugging.
+     */
+    public RefreshService(String name) {
+        super(name);
+    }
+
+    public RefreshService(){
+        super(TAG);
+    }
+
+
+
     @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    protected void onHandleIntent(Intent intent) {
+        String action = intent.getAction();
+        if(action.equals(ACTION_REFRESH_MAIN_PAGE)) {
+            startRefresh();
+        }
+    }
+
+    private void startRefresh() {
+        mRunnable = new MainPageRunnable(new MainPageCallback());
+        while(GDUTApplication.hasLogin) {
+            try {
+                L.e("刷新");
+                mRunnable.run();
+                Thread.sleep(DEFAULT_REFRESH_TIME);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class MainPageCallback implements BaseRunnable.TaskCallback {
+
+        @Override
+        public void onResult(boolean isConnected, Bundle data) {
+            GDUTApplication.hasLogin = isConnected;
+        }
     }
 }

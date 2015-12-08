@@ -27,6 +27,8 @@
         <activity android:name=".ui.LevelScoreActivity" />
         <activity android:name=".ui.TestDetailActivity"/>
         <activity android:name=".ui.SettingActivity"/>
+
+        <service android:name=".service.RefreshService"/>
     </application>
 
 </manifest>

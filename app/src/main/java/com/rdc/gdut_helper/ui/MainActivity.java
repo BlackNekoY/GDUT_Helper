@@ -1,12 +1,16 @@
 package com.rdc.gdut_helper.ui;
 
+import android.app.IntentService;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.rdc.gdut_helper.R;
 import com.rdc.gdut_helper.app.GDUTApplication;
@@ -15,10 +19,13 @@ import com.rdc.gdut_helper.net.CheckCodeRunnable;
 import com.rdc.gdut_helper.net.LoginRunnable;
 import com.rdc.gdut_helper.net.MainPageRunnable;
 import com.rdc.gdut_helper.net.WelcomePageRunnable;
+import com.rdc.gdut_helper.service.RefreshService;
 import com.rdc.gdut_helper.ui.base.ToolbarActivity;
+import com.rdc.gdut_helper.utils.L;
 import com.rdc.gdut_helper.utils.ProgressDialogInflater;
 import com.rdc.gdut_helper.view.LoginView;
 
+import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -30,6 +37,7 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
     private LoginView mLoginView;
     private AlertDialog mLoginDialog;
     private MenuItem mMenuItem;
+    private long mExitTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +75,40 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
         super.onResume();
     }
 
+    @Override
+    protected void onDestroy() {
+        stopRefreshService();
+        super.onDestroy();
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                mExitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     private void refreshLoginStatus() {
-        if(mMenuItem!=null) {
+        if (mMenuItem != null) {
             mMenuItem.setTitle(GDUTApplication.hasLogin ? R.string.has_login : R.string.has_not_login);
         }
 
+    }
+
+    private void startRefreshService() {
+        Intent intent = new Intent(this, RefreshService.class);
+        intent.setAction(RefreshService.ACTION_REFRESH_MAIN_PAGE);
+        startService(intent);
+    }
+
+    private void stopRefreshService() {
+        GDUTApplication.hasLogin = false;
     }
 
 
@@ -83,21 +120,22 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
         loadWelcomePage();
         mLoginView = new LoginView(this);
         mLoginView.setListener(new LoginViewListener());
-        mLoginDialog = new AlertDialog.Builder(this).
-                setView(mLoginView).
-                setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (mLoginView.isMsgComplete()) {
-                            ProgressDialogInflater.showProgressDialog(MainActivity.this, "登录中...");
-                            mThreadPool.execute(new LoginRunnable(mLoginView.getStuNumber(), mLoginView.getStuPassword(), mLoginView.getCheckCode(), new LoginCallback()));
-                        } else {
-                            mLoginView.showErrorText("信息不完整");
-                        }
-                    }
-                })
-                .setNegativeButton(R.string.cancel,null).setCancelable(false).create();
+        mLoginDialog = new AlertDialog.Builder(this)
+                .setView(mLoginView)
+                .setPositiveButton(R.string.login, null)
+                .setNegativeButton(R.string.cancel, null).setCancelable(false).create();
         mLoginDialog.show();
+        mLoginDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mLoginView.isMsgComplete()) {
+                    ProgressDialogInflater.showProgressDialog(MainActivity.this, "登录中...");
+                    mThreadPool.execute(new LoginRunnable(mLoginView.getStuNumber(), mLoginView.getStuPassword(), mLoginView.getCheckCode(), new LoginCallback()));
+                } else {
+                    mLoginView.showErrorText("信息不完整");
+                }
+            }
+        });
     }
 
     private void initListener() {
@@ -178,6 +216,7 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
                 @Override
                 public void run() {
                     if (isConnected) {
+                        L.e("LoginSucceed");
                         GDUTApplication.stuNum = mLoginView.getStuNumber();
                         GDUTApplication.stuPsw = mLoginView.getStuPassword();
                         mLoginDialog.dismiss();
@@ -185,6 +224,7 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
                         mThreadPool.execute(new MainPageRunnable(new MainPageCallback()));
 
                     } else {
+                        L.e("LoginFailed");
                         String reason = data.getString("reason");
                         ProgressDialogInflater.dismiss();
                         mLoginView.showErrorText(reason);
@@ -207,6 +247,7 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
                     ProgressDialogInflater.dismiss();
                     if (isConnected) {
                         GDUTApplication.hasLogin = true;
+                        startRefreshService();
                     } else {
                         GDUTApplication.hasLogin = false;
                     }
