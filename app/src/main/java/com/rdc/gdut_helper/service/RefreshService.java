@@ -22,19 +22,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Created by blackwhite on 15-12-7.
  */
-public class NetWorkService extends IntentService {
+public class RefreshService extends Service {
 
-    /**
-     * Creates an IntentService.  Invoked by your subclass's constructor.
-     *
-     * @param name Used to name the worker thread, important only for debugging.
-     */
-    public NetWorkService(String name) {
-        super(name);
-    }
-
+    @Nullable
     @Override
-    protected void onHandleIntent(Intent intent) {
-        L.e("");
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 }
