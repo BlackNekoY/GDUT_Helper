@@ -12,10 +12,8 @@
 ### License
 
 ```
-GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+                GNU GENERAL PUBLIC LICENSE
+                   Version 3, 29 June 2007
 
-Copyright (C) 2015 Fython
-
-This program comes with ABSOLUTELY NO WARRANTY.
-This is free software, and you are welcome to redistribute it under certain conditions.
-```
+Copyright (C) 2007 Free Software Foundation, Inc. http://fsf.org/ Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+...
