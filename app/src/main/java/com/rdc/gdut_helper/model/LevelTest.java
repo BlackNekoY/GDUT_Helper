@@ -35,7 +35,7 @@ public class LevelTest implements Parcelable {
     }
 
     public static boolean isCorrectTest(LevelTest levelTest) {
-        return (levelTest == null || TextUtils.isEmpty(levelTest.year) || TextUtils.isEmpty(levelTest.term) || TextUtils.isEmpty(levelTest.name)) ? false : true;
+        return !(levelTest == null || TextUtils.isEmpty(levelTest.year) || TextUtils.isEmpty(levelTest.term) || TextUtils.isEmpty(levelTest.name));
     }
 
     @Override

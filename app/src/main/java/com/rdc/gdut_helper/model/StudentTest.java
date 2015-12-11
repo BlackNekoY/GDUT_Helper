@@ -21,7 +21,7 @@ public class StudentTest implements Parcelable {
     }
 
     public static boolean isCorrectTest(StudentTest studentTest) {
-        return (studentTest == null || TextUtils.isEmpty(studentTest.id) || TextUtils.isEmpty(studentTest.name)) ? false : true;
+        return !(studentTest == null || TextUtils.isEmpty(studentTest.id) || TextUtils.isEmpty(studentTest.name));
     }
 
     protected StudentTest(Parcel in) {

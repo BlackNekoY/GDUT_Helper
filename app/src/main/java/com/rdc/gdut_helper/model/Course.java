@@ -78,7 +78,7 @@ public class Course implements Parcelable {
     };
 
     public static boolean isCorrectCourse(Course course) {
-        return (course == null || TextUtils.isEmpty(course.id) || TextUtils.isEmpty(course.name) || TextUtils.isEmpty(course.category)) ? false : true;
+        return !(course == null || TextUtils.isEmpty(course.id) || TextUtils.isEmpty(course.name) || TextUtils.isEmpty(course.category));
     }
 
 }
