@@ -43,10 +43,21 @@ public class SettingActivity extends ToolbarActivity implements View.OnClickList
         $(R.id.rl_github_project).setOnClickListener(this);
     }
 
+    @Override
+    protected void onResume() {
+        if(hasLogin()) {
+            mSwitchRemeber.setChecked(GDUTApplication.isRemember);
+        }else {
+            mSwitchRemeber.setChecked(false);
+        }
+        super.onResume();
+    }
 
     @Override
     protected void onDestroy() {
-        GDUTApplication.saveSettings();
+        if(hasLogin()) {
+            GDUTApplication.saveSettings();
+        }
         super.onDestroy();
     }
 
