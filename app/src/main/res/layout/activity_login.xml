@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/status_view"/>
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/status_view" />
+
+    <include layout="@layout/toolbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -84,48 +85,44 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/inputlayout_check_code"
-            android:layout_alignLeft="@id/inputlayout_check_code"
-            android:background="@color/colorAccent"
-            android:layout_marginTop="16dp"
-            android:text="@string/login"/>
 
         <ImageView
             android:id="@+id/iv_checkcode"
             android:layout_width="90dp"
             android:layout_height="match_parent"
             android:layout_alignBottom="@id/inputlayout_check_code"
-            android:layout_alignParentRight="true"
             android:layout_alignTop="@id/inputlayout_check_code"
             android:layout_below="@id/inputlayout_stu_psw"
+            android:layout_alignRight="@id/inputlayout_stu_psw"
             android:paddingBottom="5dp"
             android:paddingTop="5dp" />
 
         <TextView
             android:id="@+id/tv_change_checkcode"
             android:layout_width="wrap_content"
-            android:padding="15dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_below="@id/iv_checkcode"
+            android:layout_alignLeft="@id/iv_checkcode"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
             android:text="看不清,换一张?" />
+
 
         <TextView
             android:id="@+id/tv_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/inputlayout_check_code"
-            android:layout_below="@id/btn_login"
+            android:layout_below="@id/inputlayout_check_code"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="8dp"
             android:gravity="center"
+            android:layout_alignTop="@id/tv_change_checkcode"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:visibility="gone"
             android:textColor="?attr/colorAccent"
-            android:textSize="14sp"
-            android:visibility="gone" />
+            android:textSize="14sp"/>
 
     </RelativeLayout>
 </LinearLayout>

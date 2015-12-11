@@ -1,11 +1,16 @@
 package com.rdc.gdut_helper.ui;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,19 +33,23 @@ import java.util.concurrent.Executors;
 public class LoginActivity extends ToolbarActivity implements View.OnClickListener {
 
     public static final int REQUEST_CODE = 1;
+    private final int STATUS_NORMAL = 0;
+    private final int STATUS_SYNC = 1;
 
     private ImageView mIvCheckCode;
     private TextInputLayout mInputLayoutStuNum;
     private TextInputLayout mInputLayoutStuPsw;
     private TextInputLayout mInputLayoutCheckCode;
     private TextView mTvError;
+    private MenuItem mMenuItem;
     private ExecutorService mThreadPool = Executors.newFixedThreadPool(5);
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_dialog);
+        setContentView(R.layout.activity_login);
+        setTitle(R.string.login);
 
         init();
         loadWelcomePage();
@@ -63,35 +72,62 @@ public class LoginActivity extends ToolbarActivity implements View.OnClickListen
             mInputLayoutStuPsw.getEditText().setText(GDUTApplication.stuPsw);
         }
         $(R.id.tv_change_checkcode).setOnClickListener(this);
-        $(R.id.btn_login).setOnClickListener(this);
     }
 
-    public boolean isMsgComplete() {
+    private boolean isMsgComplete() {
         return !TextUtils.isEmpty(mInputLayoutStuNum.getEditText().getText().toString().trim()) &&
                 !TextUtils.isEmpty(mInputLayoutStuPsw.getEditText().getText().toString().trim()) &&
                 !TextUtils.isEmpty(mInputLayoutCheckCode.getEditText().getText().toString().trim());
 
     }
 
-    public String getStuNumber() {
+    private String getStuNumber() {
         return mInputLayoutStuNum.getEditText().getText().toString().trim();
     }
 
-    public String getStuPassword() {
+    private String getStuPassword() {
         return mInputLayoutStuPsw.getEditText().getText().toString().trim();
     }
 
-    public String getCheckCode() {
+    private String getCheckCode() {
         return mInputLayoutCheckCode.getEditText().getText().toString().trim();
     }
 
-    public void setCheckCodeImage(Bitmap bitmap) {
+    private void setCheckCodeImage(Bitmap bitmap) {
         mIvCheckCode.setImageBitmap(bitmap);
     }
 
-    public void showErrorText(CharSequence text) {
+    private void showErrorText(CharSequence text) {
         mTvError.setVisibility(View.VISIBLE);
         mTvError.setText(text);
+        mInputLayoutCheckCode.getEditText().setText("");
+    }
+
+    private boolean login() {
+        if (isMsgComplete()) {
+//            setMenuIcon(STATUS_SYNC);
+            ProgressDialogInflater.showProgressDialog(this, "正在登录");
+            mThreadPool.execute(new LoginRunnable(getStuNumber(), getStuPassword(), getCheckCode(), new LoginCallback()));
+            return true;
+        }
+        return false;
+    }
+
+    private void setMenuIcon(int status) {
+
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        ImageView iv = (ImageView) inflater.inflate(R.layout.image_done, null);
+
+        if (status == STATUS_NORMAL) {
+            iv.setImageResource(R.drawable.ic_done_white_24dp);
+        } else if (status == STATUS_SYNC) {
+            iv.setImageResource(R.drawable.ic_sync_white_24dp);
+            Animation animation = AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
+            animation.setRepeatCount(Animation.INFINITE);
+            iv.startAnimation(animation);
+        }
+        mMenuItem.setActionView(iv);
+
     }
 
     public void hideErrorText() {
@@ -104,15 +140,26 @@ public class LoginActivity extends ToolbarActivity implements View.OnClickListen
             case R.id.tv_change_checkcode:
                 mThreadPool.execute(new CheckCodeRunnable(new CheckCodeCallBack()));
                 break;
-            case R.id.btn_login:
-                if (isMsgComplete()) {
-                    ProgressDialogInflater.showProgressDialog(this, "正在登录");
-                    mThreadPool.execute(new LoginRunnable(getStuNumber(), getStuPassword(), getCheckCode(), new LoginCallback()));
-                } else {
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_login, menu);
+        mMenuItem = menu.getItem(0);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.done:
+                if (!login()) {
                     showErrorText("信息不完整");
                 }
                 break;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     private class WelcomePageCallback implements BaseRunnable.TaskCallback {
@@ -154,6 +201,7 @@ public class LoginActivity extends ToolbarActivity implements View.OnClickListen
                         ProgressDialogInflater.setMessage("正在获取首页");
                         mThreadPool.execute(new MainPageRunnable(new MainPageCallback()));
                     } else {
+//                        setMenuIcon(STATUS_NORMAL);
                         String reason = data.getString("reason");
                         ProgressDialogInflater.dismiss();
                         showErrorText(reason);
@@ -171,6 +219,7 @@ public class LoginActivity extends ToolbarActivity implements View.OnClickListen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+//                    setMenuIcon(STATUS_NORMAL);
                     ProgressDialogInflater.dismiss();
                     if (isConnected) {
                         GDUTApplication.hasLogin = true;

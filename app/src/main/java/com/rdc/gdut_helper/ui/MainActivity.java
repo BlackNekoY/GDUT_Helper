@@ -1,11 +1,7 @@
 package com.rdc.gdut_helper.ui;
 
-import android.app.IntentService;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,23 +10,11 @@ import android.widget.Toast;
 
 import com.rdc.gdut_helper.R;
 import com.rdc.gdut_helper.app.GDUTApplication;
-import com.rdc.gdut_helper.constant.ConnectConfig;
-import com.rdc.gdut_helper.net.BaseRunnable;
-import com.rdc.gdut_helper.net.CheckCodeRunnable;
-import com.rdc.gdut_helper.net.LoginRunnable;
-import com.rdc.gdut_helper.net.MainPageRunnable;
-import com.rdc.gdut_helper.net.WelcomePageRunnable;
 import com.rdc.gdut_helper.service.RefreshService;
 import com.rdc.gdut_helper.ui.base.ToolbarActivity;
-import com.rdc.gdut_helper.utils.L;
-import com.rdc.gdut_helper.utils.ProgressDialogInflater;
-import com.rdc.gdut_helper.view.LoginView;
 
-import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class MainActivity extends ToolbarActivity implements View.OnClickListener {
 
