@@ -14,23 +14,42 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HTMLUtil {
 
+    private static final String TAG = "HTMLUtil";
     private static final String SPACE = "&nbsp;";
 
     public static String getViewState(String str) {
         if (TextUtils.isEmpty(str)) {
             return null;
         }
-        String key = "name=\"__VIEWSTATE\"";
-        int startIndex = str.indexOf(key);
-        str = str.substring(startIndex);
-        int endIndex = str.indexOf("\" />");
-        str = str.substring(0 + key.length() + 1, endIndex);
-        str = str.substring("value=\"".length());
-        return str;
+        String regex = "(?<=name=\"__VIEWSTATE\" value=\").*?(?=\")";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+        if (matcher.find()) {
+            return matcher.group();
+        } else {
+            return null;
+        }
     }
+
+    public static String getStuName(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return null;
+        }
+        String regex = "(?<=<span id=\"xhxm\">).*?(?=同学)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+        if (matcher.find()) {
+            return matcher.group();
+        } else {
+            return null;
+        }
+    }
+
 
     public static void logHeaders(HttpURLConnection conn) {
         Map<String, List<String>> headerFields = conn.getHeaderFields();
@@ -41,31 +60,22 @@ public class HTMLUtil {
         }
     }
 
-    public static String getStuName(String str) {
-        if (TextUtils.isEmpty(str)) {
-            return null;
-        }
-        String key = "<span id=\"xhxm\">";
-        int startIndex = str.indexOf(key);
-        str = str.substring(startIndex);
-        int endIndex = str.indexOf("同学");
-        str = str.substring(0 + key.length(), endIndex);
-        return str;
-    }
 
     private static Course getCourseFromLine(String str) {
-        Course course = new Course();
+        Course course = null;
         if (TextUtils.isEmpty(str)) {
             return null;
         }
-        String startKey = "<td>";
-        String endKey = "</td>";
 
-        for (String temp : str.split(endKey)) {
-            if (temp.length() < startKey.length()) {
-                break;
+        String regex = "(?<=<td>).*?(?=</td>)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+
+        while (matcher.find()) {
+            if (course == null) {
+                course = new Course();
             }
-            String value = temp.substring(startKey.length());
+            String value = matcher.group();
             if (value.equals(SPACE)) {
                 value = Course.NULL_VALUE;
             }
@@ -87,35 +97,37 @@ public class HTMLUtil {
                 course.isRetake = !(value == Course.NULL_VALUE);
             } else if (course.point == null) {
                 course.point = value;
+            } else {
+                break;
             }
         }
         return Course.isCorrectCourse(course) ? course : null;
     }
 
+    /**
+     * 获取课程考试成绩
+     *
+     * @param str
+     * @return
+     */
     public static ArrayList<Course> getCourseList(String str) {
         ArrayList<Course> list = new ArrayList<>();
         if (TextUtils.isEmpty(str)) {
             return list;
         }
-        String startKey = "<td>课程代码</td><td>课程名称</td><td>课程性质</td><td>成绩</td><td>课程归属</td><td>补考成绩</td><td>重修成绩</td><td>学分</td><td>辅修标记</td>\n" +
-                "\t</tr><tr>";
+        String startKey = "<tr class=\"datelisthead\">\n";
         String endKey = "</table>";
-        int startIndex = str.indexOf(startKey);
+        int startIndex = str.indexOf(startKey) + startKey.length();
         if (startIndex == -1) {
             return list;
         }
-        str = str.substring(startIndex + startKey.length());
+        str = str.substring(startIndex);
         int endIndex = str.indexOf(endKey);
         str = str.substring(0, endIndex);
-        str = str.replaceAll("</tr><tr class=\"alt\">", "");
-        str = str.replaceAll("</tr><tr>", "");
-        str = str.trim();
-        str = str.replaceAll("\t", "");
 
-        for (String line : str.split("\n")) {
-            if (line.length() < 2) {
-                continue;
-            }
+        String[] strs = str.split("\n");
+        for (int i = 1; i < strs.length; i++) {
+            String line = strs[i];
             Course course = HTMLUtil.getCourseFromLine(line);
             if (course != null) {
                 list.add(course);
@@ -124,24 +136,23 @@ public class HTMLUtil {
         return list;
     }
 
-
     private static LevelTest getLevelTest(String str) {
-        LevelTest levelTest = new LevelTest();
+        LevelTest levelTest = null;
         if (TextUtils.isEmpty(str)) {
             return null;
         }
-        String startKey = "<td>";
-        String endKey = "</td>";
+        String regex = "(?<=<td>).*?(?=</td>)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
 
-        for (String temp : str.split(endKey)) {
-            if (temp.length() < startKey.length()) {
-                break;
+        while (matcher.find()) {
+            if (levelTest == null) {
+                levelTest = new LevelTest();
             }
-            String value = temp.substring(startKey.length());
+            String value = matcher.group();
             if (value.equals(SPACE)) {
                 value = Course.NULL_VALUE;
             }
-
             if (levelTest.year == null) {
                 levelTest.year = value;
             } else if (levelTest.term == null) {
@@ -163,7 +174,6 @@ public class HTMLUtil {
             } else {
                 break;
             }
-
         }
         return LevelTest.isCorrectTest(levelTest) ? levelTest : null;
     }
@@ -173,25 +183,19 @@ public class HTMLUtil {
         if (TextUtils.isEmpty(str)) {
             return list;
         }
-        String startKey = "<td>学年</td><td>学期</td><td>等级考试名称</td><td>准考证号</td><td>考试日期</td><td>成绩</td><td>听力成绩</td><td>阅读成绩</td><td>写作成绩</td><td>综合成绩</td>\n" +
-                "\t</tr><tr>";
+        String startKey = "<tr class=\"datelisthead\">\n";
         String endKey = "</table>";
-        int startIndex = str.indexOf(startKey);
+        int startIndex = str.indexOf(startKey) + startKey.length();
         if (startIndex == -1) {
             return list;
         }
-        str = str.substring(startIndex + startKey.length());
+        str = str.substring(startIndex);
         int endIndex = str.indexOf(endKey);
         str = str.substring(0, endIndex);
-        str = str.replaceAll("</tr><tr class=\"alt\">", "");
-        str = str.replaceAll("</tr><tr>", "");
-        str = str.trim();
-        str = str.replaceAll("\t", "");
 
-        for (String line : str.split("\n")) {
-            if (line.length() < 2) {
-                continue;
-            }
+        String[] strs = str.split("\n");
+        for (int i = 1; i < strs.length; i++) {
+            String line = strs[i];
             LevelTest levelTest = HTMLUtil.getLevelTest(line);
             if (levelTest != null) {
                 list.add(levelTest);
@@ -201,19 +205,20 @@ public class HTMLUtil {
     }
 
     private static StudentTest getStudentTest(String str) {
-        StudentTest studentTest = new StudentTest();
+        StudentTest studentTest = null;
         if (TextUtils.isEmpty(str)) {
             return null;
         }
-        String name = null;
-        String startKey = "<td>";
-        String endKey = "</td>";
+        String regex = "(?<=<td>).*?(?=</td>)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
 
-        for (String temp : str.split(endKey)) {
-            if (temp.length() < startKey.length()) {
-                break;
+        String name = null;
+        while (matcher.find()) {
+            if (studentTest == null) {
+                studentTest = new StudentTest();
             }
-            String value = temp.substring(startKey.length());
+            String value = matcher.group();
             if (value.equals(SPACE)) {
                 value = StudentTest.NULL_VALUE;
             }
@@ -237,40 +242,40 @@ public class HTMLUtil {
                 break;
             }
         }
-
         return StudentTest.isCorrectTest(studentTest) ? studentTest : null;
+
     }
 
-
+    /**
+     * 获取期末考试信息
+     *
+     * @param str
+     * @return
+     */
     public static ArrayList<StudentTest> getStudentTestList(String str) {
         ArrayList<StudentTest> list = new ArrayList<>();
         if (TextUtils.isEmpty(str)) {
             return list;
         }
-        String startKey = "<td>选课课号</td><td>课程名称</td><td>姓名</td><td>考试时间</td><td>考试地点</td><td>考试形式</td><td>座位号</td><td>校区</td>";
+        String startKey = "<tr class=\"datelisthead\">\n";
         String endKey = "</table>";
-        int startIndex = str.indexOf(startKey);
+        int startIndex = str.indexOf(startKey) + startKey.length();
+
         if (startIndex == -1) {
             return list;
         }
-        str = str.substring(startIndex + startKey.length());
+        str = str.substring(startIndex);
         int endIndex = str.indexOf(endKey);
         str = str.substring(0, endIndex);
-        str = str.replaceAll("</tr><tr class=\"alt\">", "");
-        str = str.replaceAll("</tr><tr>", "");
-        str = str.trim();
-        str = str.replaceAll("\t", "");
 
-        for (String line : str.split("\n")) {
-            if (line.length() < 2) {
-                continue;
-            }
+        String[] strs = str.split("\n");
+        for (int i = 1; i < strs.length; i++) {
+            String line = strs[i];
             StudentTest studentTest = HTMLUtil.getStudentTest(line);
             if (studentTest != null) {
                 list.add(studentTest);
             }
         }
-
         return list;
     }
 }
