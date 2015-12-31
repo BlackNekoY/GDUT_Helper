@@ -2,6 +2,7 @@ package com.rdc.gdut_helper.net;
 
 
 import com.rdc.gdut_helper.constant.ConnectConfig;
+import com.rdc.gdut_helper.utils.L;
 
 import java.io.IOException;
 
@@ -19,6 +20,7 @@ public class PersonalInfoRunnable extends BaseRunnable {
             try {
                 String result = read();
                 isConnected = isCorrectResponse(result);
+                L.e(result);
             } catch (IOException e) {
                 isConnected = false;
                 e.printStackTrace();

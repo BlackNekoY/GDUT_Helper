@@ -4,8 +4,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 
+import com.rdc.gdut_helper.constant.ConnectConfig;
 import com.rdc.gdut_helper.model.Course;
 import com.rdc.gdut_helper.model.LevelTest;
+import com.rdc.gdut_helper.model.PersonalInfo;
 import com.rdc.gdut_helper.model.StudentTest;
 
 import java.net.HttpURLConnection;
@@ -277,5 +279,131 @@ public class HTMLUtil {
             }
         }
         return list;
+    }
+
+    public static PersonalInfo getPersonalInfo(String str) {
+        PersonalInfo personalInfo = new PersonalInfo();
+
+        String photoUrlRegex = "(?<=<img id=\"xszp\" src=\").*?(?=\" alt=\"照片\")";
+        String nameRegex = "(?<=<span id=\"" + "xm" + "\">).*?(?=</span>)";
+        String sexRegex = "(?<=<span id=\"" + "lbl_xb" + "\">).*?(?=</span>)";
+        String stuNumRegex = "(?<=<span id=\"" + "xh" + "\">).*?(?=</span>)";
+        String birthTimeRegex = "(?<=<span id=\"" + "lbl_csrq" + "\">).*?(?=</span>)";
+        String admissionTimeRegex = "(?<=<span id=\"" + "lbl_rxrq" + "\">).*?(?=</span>)";
+        String facultyRegex = "(?<=<span id=\"" + "lbl_xy" + "\">).*?(?=</span>)";
+        String professionRegex = "(?<=<span id=\"" + "lbl_zymc" + "\">).*?(?=</span>)";
+        String classRegex = "(?<=<span id=\"" + "lbl_xzb" + "\">).*?(?=</span>)";
+        String educationRegex = "(?<=<span id=\"" + "lbl_CC" + "\">).*?(?=</span>)";
+        String ticketRegex = "(?<=<span id=\"" + "lbl_zkzh" + "\">).*?(?=</span>)";
+        String idCardNumRegex = "(?<=<span id=\"" + "lbl_sfzh" + "\">).*?(?=</span>)";
+        String cadidateNumRegex = "(?<=<span id=\"" + "lbl_ksh" + "\">).*?(?=</span>)";
+        String phoneNumRegex = "(?<=<input name=\"TELNUMBER\" type=\"text\" value=\").*?(?=\" id=\"TELNUMBER\")";
+        String emailRegex = "(?<=<input name=\"dzyxdz\" type=\"text\" value=\").*?(?=\" id=\"dzyxdz\")";
+        String dormNumRegex = "(?<=<input name=\"ssh\" type=\"text\" value=\").*?(?=\" id=\"ssh\")";
+        String middleSchoolRegex = "(?<=<input name=\"byzx\" type=\"text\" value=\").*?(?=\" id=\"byzx\")";
+        String fatherNameRegex = "(?<=<input name=\"fqxm\" type=\"text\" value=\").*?(?=\" id=\"fqxm\")";
+        String fatherOrganizationRegex = "(?<=<input name=\"fqdw\" type=\"text\" value=\").*?(?=\" id=\"fqdw\")";
+        String fatherPhoneNumRegex = "(?<=<input name=\"fqdwdh\" type=\"text\" value=\").*?(?=\" id=\"fqdwdh\")";
+        String motherNameRegex = "(?<=<input name=\"mqxm\" type=\"text\" value=\").*?(?=\" id=\"mqxm\")";
+        String motherOrganizationRegex = "(?<=<input name=\"mqdw\" type=\"text\" value=\").*?(?=\" id=\"mqdw\")";
+        String motherPhoneNumRegex = "(?<=<input name=\"mqdwdh\" type=\"text\" value=\").*?(?=\" id=\"mqdwdh\")";
+
+        Matcher matcher;
+
+        matcher = Pattern.compile(photoUrlRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mPhotoUrl = ConnectConfig.HOST + "/" + matcher.group();
+        }
+        matcher = Pattern.compile(nameRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mName = matcher.group();
+        }
+        matcher = Pattern.compile(sexRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mSex = matcher.group();
+        }
+        matcher = Pattern.compile(stuNumRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mStuNum = matcher.group();
+        }
+        matcher = Pattern.compile(birthTimeRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mBirthTime = matcher.group();
+        }
+        matcher = Pattern.compile(admissionTimeRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mAddmissionTime = matcher.group();
+        }
+        matcher = Pattern.compile(facultyRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mFaculty = matcher.group();
+        }
+        matcher = Pattern.compile(professionRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mProfession = matcher.group();
+        }
+        matcher = Pattern.compile(classRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mClass = matcher.group();
+        }
+        matcher = Pattern.compile(educationRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mEducation = matcher.group();
+        }
+        matcher = Pattern.compile(ticketRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mTicket = matcher.group();
+        }
+        matcher = Pattern.compile(idCardNumRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mIdCardNum = matcher.group();
+        }
+        matcher = Pattern.compile(cadidateNumRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mCandidate = matcher.group();
+        }
+        matcher = Pattern.compile(phoneNumRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mPhoneNum = matcher.group();
+        }
+        matcher = Pattern.compile(emailRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mEmail = matcher.group();
+        }
+        matcher = Pattern.compile(dormNumRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mDormNum = matcher.group();
+        }
+        matcher = Pattern.compile(middleSchoolRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mMiddleSchool = matcher.group();
+        }
+        matcher = Pattern.compile(fatherNameRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mFatherName = matcher.group();
+        }
+        matcher = Pattern.compile(fatherOrganizationRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mFatherOrganization = matcher.group();
+        }
+        matcher = Pattern.compile(fatherPhoneNumRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mFatherPhoneNum = matcher.group();
+        }
+        matcher = Pattern.compile(motherNameRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mMotherName = matcher.group();
+        }
+        matcher = Pattern.compile(motherOrganizationRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mMotherOrganization = matcher.group();
+        }
+        matcher = Pattern.compile(motherPhoneNumRegex).matcher(str);
+        if (matcher.find()) {
+            personalInfo.mMotherPhoneNum = matcher.group();
+        }
+
+        return personalInfo;
+
     }
 }

@@ -21,6 +21,8 @@
     <string name="has_login">已登录</string>
     <string name="has_not_login">未登录</string>
     <string name="done">完成</string>
+    <string name="constant_msg">固定信息</string>
+    <string name="changeable_msg">可修改信息</string>
 
     <string-array name="year_array">
         <item>学年</item>

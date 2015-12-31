@@ -1,6 +1,9 @@
 package com.rdc.gdut_helper.constant;
 
+import com.android.volley.toolbox.StringRequest;
 import com.rdc.gdut_helper.app.GDUTApplication;
+
+import java.net.PortUnreachableException;
 
 public class ConnectConfig {
     public final static String HOST = "http://jwgl.gdut.edu.cn";
@@ -60,6 +63,37 @@ public class ConnectConfig {
     public static class PersonalInfo {
         public final static String PATH_INFO = "/xsgrxx.aspx?xh=" + GDUTApplication.stuNum + "&xm=" + GDUTApplication.stuNameEncode + "&gnmkdm=N121501";
         public final static String PATH_IMAGE = "/readimagexs.aspx?xh=" + GDUTApplication.stuNum;
+
+        public final static String PARAM_EVENT_TARGET = "__EVENTTARGET";
+        public final static String PARAM_EVENT_ARGUMENT = "__EVENTARGUMENT";
+        public final static String PARAM_VIEW_STATE = "__VIEWSTATE";
+        public final static String PARAM_HID_LANGUAGE = "hidLanguage";
+        public final static String PARAM_TELNUMBER = "TELNUMBER";
+        public final static String PARAM_JTYB = "jtyb";
+        public final static String PARAM_JYDH = "jtdh";
+        public final static String PARAM_BYZX = "byzx";
+        public final static String PARAM_FQXM = "fqxm";
+        public final static String PARAM_SSH = "ssh";
+        public final static String PARAM_FQDW = "fqdw";
+        public final static String PARAM_TXTJG = "txtjg";
+        public final static String PARAM_JG = "jg";
+        public final static String PARAM_DZYXDZ = "dzyxdz";
+        public final static String PARAM_FQDWYB = "fqdwyb";
+        public final static String PARAM_FILE1 = "File1";
+        public final static String PARAM_ZZMM = "zzmm";
+        public final static String PARAM_LXDH = "lxdh";
+        public final static String PARAM_MQXM = "mqxm";
+        public final static String PARAM_YZBM = "yzbm";
+        public final static String PARAM_MQDW = "mqdw";
+        public final static String PARAM_MQDWYB = "mqdwyb";
+        public final static String PARAM_FQDWDH = "fqdwdh";
+        public final static String PARAM_JKZK = "jkzk";
+        public final static String PARAM_MQDWDH = "mqdwdh";
+        public final static String PARAM_JTDZ = "jtdz";
+        public final static String PARAM_JTSZD = "jtszd";
+        public final static String PARAM_RDSJ = "RDSJ";
+        public final static String PARAM_CCQJ = "ccqj";
+        public final static String PARAM_BUTTON1 = "Button1";
     }
 
     public static class StudentTest {

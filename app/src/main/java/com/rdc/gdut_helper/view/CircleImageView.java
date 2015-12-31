@@ -169,14 +169,12 @@ public class CircleImageView extends ImageView {
 	@Override
 	public void setImageBitmap(Bitmap bm) {
 		super.setImageBitmap(bm);
-		Log.e(TAG,"setImageBitmap");
 		mBitmap = bm;
 		setup();
 	}
 
 	@Override
 	public void setImageDrawable(Drawable drawable) {
-		Log.e(TAG,"setImageDrawable");
 		super.setImageDrawable(drawable);
 		mBitmap = getBitmapFromDrawable(drawable);
 		setup();
@@ -184,7 +182,6 @@ public class CircleImageView extends ImageView {
 
 	@Override
 	public void setImageResource(int resId) {
-		Log.e(TAG,"setImageResource");
 		super.setImageResource(resId);
 		mBitmap = getBitmapFromDrawable(getDrawable());
 		setup();
@@ -192,7 +189,6 @@ public class CircleImageView extends ImageView {
 
 	@Override
 	public void setImageURI(Uri uri) {
-		Log.e(TAG,"setImageURI");
 		super.setImageURI(uri);
 		mBitmap = getBitmapFromDrawable(getDrawable());
 		setup();

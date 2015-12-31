@@ -2,6 +2,8 @@ package com.rdc.gdut_helper.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +32,10 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
 
         ((GDUTApplication) getApplication()).initSharePreferences();
         initListener();
+
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -94,7 +99,7 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
 
     private void initListener() {
         List<View> viewList = new ArrayList<>();
-        viewList.add($(R.id.rl_profile));
+        viewList.add($(R.id.rl_personal_info));
         viewList.add($(R.id.rl_schedule));
         viewList.add($(R.id.rl_course_score));
         viewList.add($(R.id.rl_level_score));
@@ -109,9 +114,12 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.rl_profile:
-                if (hasLogin()) {
-                }
+            case R.id.rl_personal_info:
+//                if (hasLogin()) {
+                    launchActivity(PersonalInfoActivity.class);
+//                } else {
+//                    launchActivity(LoginActivity.class, LoginActivity.REQUEST_CODE);
+//                }
                 break;
             case R.id.rl_schedule:
                 if (!hasLogin()) {

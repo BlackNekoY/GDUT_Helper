@@ -28,6 +28,7 @@
         <activity android:name=".ui.TestDetailActivity"/>
         <activity android:name=".ui.SettingActivity"/>
         <activity android:name=".ui.LoginActivity"/>
+        <activity android:name=".ui.PersonalInfoActivity"/>
 
         <service android:name=".service.RefreshService"/>
     </application>

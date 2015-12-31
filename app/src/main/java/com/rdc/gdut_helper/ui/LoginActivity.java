@@ -227,7 +227,7 @@ public class LoginActivity extends ToolbarActivity implements View.OnClickListen
                         finish();
                     } else {
                         GDUTApplication.hasLogin = false;
-                        showErrorText("获取首页失败，校园网又大姨妈了");
+                        showErrorText("教务系统网络有点问题");
                     }
                 }
             });

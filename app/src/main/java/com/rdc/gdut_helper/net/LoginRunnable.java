@@ -52,19 +52,19 @@ public class LoginRunnable extends BaseRunnable {
                 isConnected = isCorrectResponse(result);
 
                 if (result.contains(ERROR_CHECKCODE_KEY)) {
-                    reason = "验证码错惹+_+";
+                    reason = "验证码错误";
                 } else if (result.contains(ERROR_PASSWORD_KEY)) {
-                    reason = "密码错惹+_+";
+                    reason = "密码错误";
                 } else if (result.contains(ERROR_PAGE_KEY) || result.contains(LOGIN_PAGE_KEY)) {
-                    reason = "校园网绝赞大姨妈中+_+";
+                    reason = "教务系统网络有点问题";
                 }
             } catch (IOException e) {
-                reason = "网络不给力啊+_+";
+                reason = "网络状态不佳";
                 isConnected = false;
                 e.printStackTrace();
             }
         } else {
-            reason = "网络不给力啊+_+";
+            reason = "网络状态不佳";
         }
         data.putString("reason", reason);
         callback.onResult(isConnected, data);
