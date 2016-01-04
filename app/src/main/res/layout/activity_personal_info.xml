@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/status_view" />
+
+        <include layout="@layout/toolbar" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/SettingCategoryTextStyle"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/constant_msg" />
+
+                <View
+                    style="@style/SettingCategoryDividerStyle"
+                    android:layout_margin="0dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/card_photo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="5dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
+
+                        <ImageView
+                            android:id="@+id/iv_photo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:minHeight="120dp"
+                            android:minWidth="100dp" />
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignBottom="@id/card_photo"
+                        android:layout_alignTop="@id/card_photo"
+                        android:layout_marginRight="8dp"
+                        android:layout_toRightOf="@id/card_photo"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="2dp"
+                        app:cardElevation="2dp"
+                        app:contentPadding="16dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/tv_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:textColor="@color/primary_text"
+                                android:textSize="26sp" />
+
+                            <TextView
+                                android:id="@+id/tv_sex"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBottom="@id/tv_name"
+                                android:layout_alignRight="@id/tv_name"
+                                android:layout_margin="5dp"
+                                android:textSize="14sp" />
+
+
+                            <TextView
+                                android:id="@+id/tv_admission_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentRight="true"
+                                android:gravity="right"
+                                android:textColor="@color/secondary_text"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tv_birth_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_above="@id/tv_admission_time"
+                                android:layout_alignParentRight="true"
+                                android:textColor="@color/secondary_text"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tv_stu_num"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@id/tv_birth_time"
+                                android:layout_below="@id/tv_name"
+                                android:textColor="@color/secondary_text"
+                                android:textSize="14sp" />
+
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/card_info1"
+                        style="@style/PersonalInfoCardStyle"
+                        android:layout_below="@id/card_photo"
+                        app:cardCornerRadius="2dp"
+                        app:cardElevation="2dp"
+                        app:contentPadding="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_faculty"
+                                style="@style/PersonalInfoTextStyle" />
+
+                            <TextView
+                                android:id="@+id/tv_profession"
+                                style="@style/PersonalInfoTextStyle" />
+
+                            <TextView
+                                android:id="@+id/tv_class"
+                                style="@style/PersonalInfoTextStyle" />
+
+                            <TextView
+                                android:id="@+id/tv_education"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_marginBottom="6dp" />
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/card_info2"
+                        style="@style/PersonalInfoCardStyle"
+                        android:layout_below="@id/card_info1"
+                        app:cardCornerRadius="2dp"
+                        app:cardElevation="2dp"
+                        app:contentPadding="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_ticket"
+                                style="@style/PersonalInfoTextStyle" />
+
+                            <TextView
+                                android:id="@+id/tv_id_card_num"
+                                style="@style/PersonalInfoTextStyle" />
+
+                            <TextView
+                                android:id="@+id/tv_candidate_num"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_marginBottom="6dp" />
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/SettingCategoryTextStyle"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/changeable_msg" />
+
+                <View
+                    style="@style/SettingCategoryDividerStyle"
+                    android:layout_margin="0dp" />
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_info3"
+                    style="@style/PersonalInfoCardStyle"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    app:contentPadding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:id="@+id/tv_phone_num"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="手机号码：" />
+
+                            <EditText
+                                android:id="@+id/et_phone_num"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="0dp"
+                                android:layout_toRightOf="@id/tv_phone_num"
+                                android:background="@null"
+                                android:enabled="false"
+                                android:inputType="number"
+                                android:maxLength="20" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:id="@+id/tv_email"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="电子邮箱：" />
+
+                            <EditText
+                                android:id="@+id/et_email"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="0dp"
+                                android:layout_toRightOf="@id/tv_email"
+                                android:background="@null"
+                                android:enabled="false"
+                                android:inputType="textEmailAddress" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:id="@+id/tv_dorm_num"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="宿舍号：" />
+
+                            <EditText
+                                android:id="@+id/et_dorm_num"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="0dp"
+                                android:layout_toRightOf="@id/tv_dorm_num"
+                                android:background="@null"
+                                android:enabled="false"
+                                android:maxLength="10" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:id="@+id/tv_middle_school"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="毕业中学：" />
+
+                            <EditText
+                                android:id="@+id/et_middle_school"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="0dp"
+                                android:layout_toRightOf="@id/tv_middle_school"
+                                android:background="@null"
+                                android:enabled="false"
+                                android:maxLength="20" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_info4"
+                    style="@style/PersonalInfoCardStyle"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    app:contentPadding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:id="@+id/tv_father_name"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="父亲：" />
+
+                            <EditText
+                                android:id="@+id/et_father_name"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="0dp"
+                                android:layout_toRightOf="@id/tv_father_name"
+                                android:background="@null"
+                                android:enabled="false"
+                                android:maxLength="4" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:id="@+id/tv_father_organization"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="单位：" />
+
+                            <EditText
+                                android:id="@+id/et_father_organization"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="0dp"
+                                android:layout_toRightOf="@id/tv_father_organization"
+                                android:background="@null"
+                                android:enabled="false"
+                                android:maxLines="3" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:id="@+id/tv_father_phone_num"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="电话：" />
+
+                            <EditText
+                                android:id="@+id/et_father_phone_num"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="0dp"
+                                android:layout_toRightOf="@id/tv_father_phone_num"
+                                android:background="@null"
+                                android:enabled="false"
+                                android:inputType="number"
+                                android:maxLength="20" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_info5"
+                    style="@style/PersonalInfoCardStyle"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    app:contentPadding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:id="@+id/tv_mother_name"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="母亲：" />
+
+                            <EditText
+                                android:id="@+id/et_mother_name"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="0dp"
+                                android:layout_toRightOf="@id/tv_mother_name"
+                                android:background="@null"
+                                android:enabled="false"
+                                android:maxLength="4" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:id="@+id/tv_mother_organization"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="单位：" />
+
+                            <EditText
+                                android:id="@+id/et_mother_organization"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="0dp"
+                                android:layout_toRightOf="@id/tv_mother_organization"
+                                android:background="@null"
+                                android:enabled="false"
+                                android:maxLines="3" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:id="@+id/tv_mother_phone_num"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:text="电话：" />
+
+                            <EditText
+                                android:id="@+id/et_mother_phone_num"
+                                style="@style/PersonalInfoTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="0dp"
+                                android:layout_toRightOf="@id/tv_mother_phone_num"
+                                android:background="@null"
+                                android:enabled="false"
+                                android:inputType="number"
+                                android:maxLength="20" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_edit_white_24dp"
+        app:fabSize="normal" />
+</android.support.design.widget.CoordinatorLayout>
+

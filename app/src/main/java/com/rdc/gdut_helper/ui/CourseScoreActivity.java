@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 
 import com.rdc.gdut_helper.R;
 import com.rdc.gdut_helper.adapter.CourseListAdapter;

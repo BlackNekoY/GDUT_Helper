@@ -3,7 +3,6 @@ package com.rdc.gdut_helper.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-
 import com.rdc.gdut_helper.constant.ConnectConfig;
 
 import java.io.BufferedReader;

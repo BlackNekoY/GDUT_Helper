@@ -1,7 +1,6 @@
 package com.rdc.gdut_helper.ui;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.KeyEvent;
@@ -13,13 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.rdc.gdut_helper.R;
 import com.rdc.gdut_helper.constant.ConnectConfig;
 import com.rdc.gdut_helper.model.PersonalInfo;
@@ -29,10 +25,6 @@ import com.rdc.gdut_helper.utils.HTMLUtil;
 import com.rdc.gdut_helper.utils.ProgressDialogInflater;
 import com.rdc.gdut_helper.utils.SnackbarUtil;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 

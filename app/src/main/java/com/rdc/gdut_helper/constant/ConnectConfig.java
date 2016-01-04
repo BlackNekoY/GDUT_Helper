@@ -1,12 +1,10 @@
 package com.rdc.gdut_helper.constant;
 
-import com.android.volley.toolbox.StringRequest;
 import com.rdc.gdut_helper.app.GDUTApplication;
-
-import java.net.PortUnreachableException;
 
 public class ConnectConfig {
     public final static String HOST = "http://jwgl.gdut.edu.cn";
+//    public final static String HOST = "http://jwgldx.gdut.edu.cn";
 
     public static String cookie;
 

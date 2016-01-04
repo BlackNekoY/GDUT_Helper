@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-
 import com.rdc.gdut_helper.constant.ConnectConfig;
 
 import java.io.IOException;

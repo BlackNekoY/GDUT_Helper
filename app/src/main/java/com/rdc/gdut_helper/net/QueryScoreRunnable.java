@@ -2,7 +2,6 @@ package com.rdc.gdut_helper.net;
 
 import android.os.Bundle;
 
-
 import com.rdc.gdut_helper.constant.ConnectConfig;
 import com.rdc.gdut_helper.model.Course;
 import com.rdc.gdut_helper.utils.HTMLUtil;

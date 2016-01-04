@@ -1,6 +1,5 @@
 package com.rdc.gdut_helper.ui.base;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;

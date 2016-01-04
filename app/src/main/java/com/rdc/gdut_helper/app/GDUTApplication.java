@@ -3,8 +3,6 @@ package com.rdc.gdut_helper.app;
 import android.app.Application;
 import android.content.SharedPreferences;
 
-import com.rdc.gdut_helper.utils.L;
-
 
 public class GDUTApplication extends Application {
 

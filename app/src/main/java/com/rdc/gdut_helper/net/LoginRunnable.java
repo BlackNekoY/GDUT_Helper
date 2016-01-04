@@ -2,7 +2,6 @@ package com.rdc.gdut_helper.net;
 
 import android.os.Bundle;
 
-
 import com.rdc.gdut_helper.constant.ConnectConfig;
 
 import java.io.IOException;
@@ -74,7 +73,7 @@ public class LoginRunnable extends BaseRunnable {
     protected void initConnection() throws IOException {
         conn.setRequestMethod("POST");
         conn.setReadTimeout(DEFAULT_TIME_OUT);
-        conn.setInstanceFollowRedirects(false);
+        conn.setInstanceFollowRedirects(true);
         conn.setRequestProperty("Cookie", ConnectConfig.cookie);
         conn.setRequestProperty("Referer", ConnectConfig.HOST);
         conn.setDoOutput(true);

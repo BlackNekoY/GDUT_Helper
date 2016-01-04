@@ -4,7 +4,6 @@ package com.rdc.gdut_helper.net;
 import com.rdc.gdut_helper.app.GDUTApplication;
 import com.rdc.gdut_helper.constant.ConnectConfig;
 import com.rdc.gdut_helper.utils.HTMLUtil;
-import com.rdc.gdut_helper.utils.L;
 
 import java.io.IOException;
 import java.net.URLEncoder;

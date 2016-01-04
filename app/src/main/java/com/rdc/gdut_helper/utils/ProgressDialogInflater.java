@@ -5,8 +5,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
-import com.rdc.gdut_helper.R;
-
 public class ProgressDialogInflater {
 
     private static final int DISMISS = 1;

@@ -17,7 +17,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.rdc.gdut_helper.R;

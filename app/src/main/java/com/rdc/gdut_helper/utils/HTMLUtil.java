@@ -3,7 +3,6 @@ package com.rdc.gdut_helper.utils;
 import android.text.TextUtils;
 import android.util.Log;
 
-
 import com.rdc.gdut_helper.constant.ConnectConfig;
 import com.rdc.gdut_helper.model.Course;
 import com.rdc.gdut_helper.model.LevelTest;
