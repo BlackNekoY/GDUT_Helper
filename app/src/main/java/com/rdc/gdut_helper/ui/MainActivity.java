@@ -115,11 +115,11 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_personal_info:
-//                if (hasLogin()) {
+                if (hasLogin()) {
                     launchActivity(PersonalInfoActivity.class);
-//                } else {
-//                    launchActivity(LoginActivity.class, LoginActivity.REQUEST_CODE);
-//                }
+                } else {
+                    launchActivity(LoginActivity.class, LoginActivity.REQUEST_CODE);
+                }
                 break;
             case R.id.rl_schedule:
                 if (!hasLogin()) {
