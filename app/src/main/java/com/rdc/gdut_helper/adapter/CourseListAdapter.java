@@ -26,6 +26,19 @@ public class CourseListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.mCourseList = courseList;
     }
 
+    private double calculatePoint() {
+        double points = 0, credits = 0;
+
+        for (Course course : mCourseList) {
+            double point = course.calculatePoint();//单科学分绩点
+            double credit = Double.parseDouble(course.point);
+
+            points += point;
+            credits += credit;
+        }
+        return points / credits;
+    }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
@@ -36,9 +49,9 @@ public class CourseListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             ((CourseViewHolder) holder).tvCourseScore.setText(course.score);
             ((CourseViewHolder) holder).tvCoursePoint.setText(course.point);
         } else if (holder instanceof HeaderViewHolder) {
-            if(mCourseList.size() > 0) {
+            if (mCourseList.size() > 0) {
                 ((HeaderViewHolder) holder).mTvPoint.setVisibility(View.VISIBLE);
-                ((HeaderViewHolder) holder).mTvPoint.setText("");
+                ((HeaderViewHolder) holder).mTvPoint.setText("平均绩点：" + String.format("%.2f", calculatePoint()));
             }
         }
     }

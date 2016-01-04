@@ -19,6 +19,30 @@ public class Course implements Parcelable {
 
     public static final String NULL_VALUE = "-1";
 
+
+    public double calculatePoint() {
+        double point = 0;
+        try {
+            point = Double.parseDouble(score) / 10 - 5;
+            if (point < 1) {
+                point = 0;
+            }
+        } catch (NumberFormatException e) {
+            if ("优秀".equals(score)) {
+                return 4.5;
+            } else if ("良好".equals(score)) {
+                return 3.5;
+            } else if ("中等".equals(score)) {
+                return 2.5;
+            } else if ("及格".equals(score)) {
+                return 1.5;
+            } else if ("不及格".equals(score)) {
+                return 0;
+            }
+        }
+        return point * Double.parseDouble(this.point);
+    }
+
     @Override
     public String toString() {
         return "Course{" +

@@ -19,7 +19,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="?attr/colorPrimary"
         android:textSize="18sp"
-        android:textStyle="italic" />
+        android:textStyle="bold" />
 </RelativeLayout>
 
 

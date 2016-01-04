@@ -81,7 +81,7 @@
                 android:text="86"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="24sp"
-                android:textStyle="italic" />
+                android:textStyle="bold" />
 
             <!-- <TextView
                  android:layout_width="wrap_content"
