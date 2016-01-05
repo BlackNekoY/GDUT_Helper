@@ -1,25 +1,40 @@
 package com.rdc.gdut_helper.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.rdc.gdut_helper.R;
 import com.rdc.gdut_helper.app.GDUTApplication;
+import com.rdc.gdut_helper.constant.ConnectConfig;
+import com.rdc.gdut_helper.net.VolleyManager;
 import com.rdc.gdut_helper.service.RefreshService;
 import com.rdc.gdut_helper.ui.base.ToolbarActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends ToolbarActivity implements View.OnClickListener {
 
     private MenuItem mMenuItem;
     private long mExitTime;
+    private ImageView mIvHead;
+    private TextView mTvName;
+    private TextView mTvStuNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +43,15 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
         setTitle(R.string.app_name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        findViewsId();
         ((GDUTApplication) getApplication()).initSharePreferences();
         initListener();
+    }
 
-
+    private void findViewsId() {
+        mIvHead = $(R.id.iv_head);
+        mTvName = $(R.id.tv_name);
+        mTvStuNum = $(R.id.tv_stu_num);
     }
 
 
@@ -63,6 +83,8 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
     @Override
     protected void onDestroy() {
         stopRefreshService();
+        android.os.Process.killProcess(android.os.Process.myPid());
+        GDUTApplication.saveSettings();
         super.onDestroy();
     }
 
@@ -82,6 +104,11 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
     private void refreshLoginStatus() {
         if (mMenuItem != null) {
             mMenuItem.setTitle(hasLogin() ? R.string.has_login : R.string.has_not_login);
+        }
+        if(hasLogin()) {
+            mTvName.setText(GDUTApplication.stuName);
+            mTvStuNum.setText(GDUTApplication.stuNum);
+            loadPhoto(ConnectConfig.HOST + ConnectConfig.PersonalInfo.PATH_IMAGE);
         }
     }
 
@@ -158,10 +185,34 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
                 refreshLoginStatus();
                 if (hasLogin()) {
                     startRefreshService();
+                    loadPhoto(ConnectConfig.HOST + ConnectConfig.PersonalInfo.PATH_IMAGE);
                 }
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void loadPhoto(String mPhotoUrl) {
+        ImageRequest imageRequest = new ImageRequest(mPhotoUrl,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        mIvHead.setImageBitmap(response);
+                    }
+                }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Cookie", ConnectConfig.cookie);
+                headers.put("Referer", ConnectConfig.HOST + ConnectConfig.PersonalInfo.PATH_INFO);
+                return headers;
+            }
+        };
+        VolleyManager.getInstance(getApplicationContext()).getRequestQueue().add(imageRequest);
     }
 
 }

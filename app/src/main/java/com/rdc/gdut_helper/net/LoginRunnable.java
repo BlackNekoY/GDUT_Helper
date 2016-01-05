@@ -1,6 +1,7 @@
 package com.rdc.gdut_helper.net;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.rdc.gdut_helper.constant.ConnectConfig;
 
@@ -49,7 +50,6 @@ public class LoginRunnable extends BaseRunnable {
                 conn.getOutputStream().write(sb.toString().getBytes());
                 String result = read();
                 isConnected = isCorrectResponse(result);
-
                 if (result.contains(ERROR_CHECKCODE_KEY)) {
                     reason = "验证码错误";
                 } else if (result.contains(ERROR_PASSWORD_KEY)) {

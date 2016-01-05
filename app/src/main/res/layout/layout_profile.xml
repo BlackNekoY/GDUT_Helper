@@ -8,17 +8,15 @@
     android:clickable="true"
     android:padding="16dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <com.rdc.gdut_helper.view.CircleImageView
             android:id="@+id/iv_head"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_account_circle_white_48dp" />
 
 
@@ -26,22 +24,23 @@
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_below="@id/iv_head"
+            android:layout_marginTop="34dp"
+            android:gravity="left"
             android:text="姓名"
             android:textColor="@color/colorText"
             android:textSize="16sp" />
+
         <TextView
             android:id="@+id/tv_stu_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="学号"
             android:layout_marginTop="4dp"
+            android:gravity="left"
+            android:text="学号"
+            android:layout_below="@id/tv_name"
             android:textColor="@color/colorText"
             android:textSize="14sp" />
 
-
-
-    </LinearLayout>
+    </RelativeLayout>
 </com.rdc.gdut_helper.view.SquareRelativeLayout>

@@ -5,7 +5,6 @@ import com.rdc.gdut_helper.app.GDUTApplication;
 public class ConnectConfig {
     public final static String HOST = "http://jwgl.gdut.edu.cn";
 //    public final static String HOST = "http://jwgldx.gdut.edu.cn";
-
     public static String cookie;
 
 

@@ -41,7 +41,7 @@ public class MainPageRunnable extends BaseRunnable {
         conn.setRequestMethod("GET");
         conn.setReadTimeout(DEFAULT_TIME_OUT);
         conn.setRequestProperty("Cookie", ConnectConfig.cookie);
-        conn.setRequestProperty("Referer", ConnectConfig.HOST);
+        conn.setRequestProperty("Referer", ConnectConfig.HOST );
     }
 
     @Override

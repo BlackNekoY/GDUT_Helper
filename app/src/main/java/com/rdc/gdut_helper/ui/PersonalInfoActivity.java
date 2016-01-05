@@ -14,7 +14,9 @@ import android.widget.TextView;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.rdc.gdut_helper.R;
 import com.rdc.gdut_helper.constant.ConnectConfig;
@@ -64,6 +66,7 @@ public class PersonalInfoActivity extends ToolbarActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_info);
+
 
         setTitle("个人资料");
 
@@ -194,9 +197,9 @@ public class PersonalInfoActivity extends ToolbarActivity implements View.OnClic
     }
 
     private void setFABVisbility(boolean isEdit) {
-        if(isEdit) {
+        if (isEdit) {
             ((FloatingActionButton) $(R.id.fab_edit)).hide();
-        }else {
+        } else {
             ((FloatingActionButton) $(R.id.fab_edit)).show();
         }
     }
@@ -215,7 +218,7 @@ public class PersonalInfoActivity extends ToolbarActivity implements View.OnClic
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK && isEdit) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && isEdit) {
             isEdit = false;
             setFABVisbility(isEdit);
             setEditTextEnabled(isEdit);

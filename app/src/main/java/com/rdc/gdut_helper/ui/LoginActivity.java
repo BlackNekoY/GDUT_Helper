@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -105,7 +106,6 @@ public class LoginActivity extends ToolbarActivity implements View.OnClickListen
 
     private boolean login() {
         if (isMsgComplete()) {
-//            setMenuIcon(STATUS_SYNC);
             ProgressDialogInflater.showProgressDialog(this, "正在登录");
             mThreadPool.execute(new LoginRunnable(getStuNumber(), getStuPassword(), getCheckCode(), new LoginCallback()));
             return true;
@@ -199,9 +199,10 @@ public class LoginActivity extends ToolbarActivity implements View.OnClickListen
                         GDUTApplication.stuNum = getStuNumber();
                         GDUTApplication.stuPsw = getStuPassword();
                         ProgressDialogInflater.setMessage("正在获取首页");
+                        Log.e("sdfdsfd","登录成功");
                         mThreadPool.execute(new MainPageRunnable(new MainPageCallback()));
                     } else {
-//                        setMenuIcon(STATUS_NORMAL);
+                        Log.e("sdfdsfd","登录失败");
                         String reason = data.getString("reason");
                         ProgressDialogInflater.dismiss();
                         showErrorText(reason);
@@ -219,15 +220,18 @@ public class LoginActivity extends ToolbarActivity implements View.OnClickListen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-//                    setMenuIcon(STATUS_NORMAL);
                     ProgressDialogInflater.dismiss();
+
                     if (isConnected) {
+                        Log.e("sdfdsfd","获取首页成功");
                         GDUTApplication.hasLogin = true;
                         setResult(0);
                         finish();
                     } else {
+                        Log.e("sdfdsfd","获取首页失败 ");
                         GDUTApplication.hasLogin = false;
-                        showErrorText("教务系统网络有点问题");
+                        showErrorText("登录首页失败");
+                        mThreadPool.execute(new WelcomePageRunnable(new WelcomePageCallback()));
                     }
                 }
             });
