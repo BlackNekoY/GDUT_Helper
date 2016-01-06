@@ -17,7 +17,7 @@ public class RefreshService extends IntentService {
     private static final String TAG = "RefreshService";
     public static final String ACTION_REFRESH_MAIN_PAGE = "action_refresh_main_page";
     private MainPageRunnable mRunnable;
-    private static final long DEFAULT_REFRESH_TIME = 30 * 1000;
+    private static final long DEFAULT_REFRESH_TIME = 1 * 1000;
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
@@ -45,6 +45,8 @@ public class RefreshService extends IntentService {
     private void startRefresh() {
         mRunnable = new MainPageRunnable(new MainPageCallback());
         while(GDUTApplication.hasLogin) {
+            if(!GDUTApplication.isOpenRefreshService)
+                continue;
             try {
                 L.e("刷新");
                 mRunnable.run();

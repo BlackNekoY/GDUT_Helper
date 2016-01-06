@@ -26,6 +26,7 @@ import com.rdc.gdut_helper.view.ModifyPasswordView;
 public class SettingActivity extends ToolbarActivity implements View.OnClickListener {
 
     private SwitchCompat mSwitchRemeber;
+    private SwitchCompat mSwitchOpenRefresh;
     private ModifyPasswordView mModifyView;
     private AlertDialog dialog;
 
@@ -38,17 +39,23 @@ public class SettingActivity extends ToolbarActivity implements View.OnClickList
         mSwitchRemeber = (SwitchCompat) ((RelativeLayout) $(R.id.rl_remember)).getChildAt(1);
         mSwitchRemeber.setChecked(GDUTApplication.isRemember);
 
+        mSwitchOpenRefresh = ((SwitchCompat) ((RelativeLayout) $(R.id.rl_open_refresh_service)).getChildAt(1));
+        mSwitchOpenRefresh.setChecked(GDUTApplication.isOpenRefreshService);
+
         $(R.id.rl_remember).setOnClickListener(this);
         $(R.id.rl_modify_password).setOnClickListener(this);
         $(R.id.rl_github_project).setOnClickListener(this);
+        $(R.id.rl_open_refresh_service).setOnClickListener(this);
     }
 
     @Override
     protected void onResume() {
         if(hasLogin()) {
             mSwitchRemeber.setChecked(GDUTApplication.isRemember);
+            mSwitchOpenRefresh.setChecked(GDUTApplication.isOpenRefreshService);
         }else {
             mSwitchRemeber.setChecked(false);
+            mSwitchOpenRefresh.setChecked(false);
         }
         super.onResume();
     }
@@ -77,6 +84,10 @@ public class SettingActivity extends ToolbarActivity implements View.OnClickList
                 break;
             case R.id.rl_github_project:
                 viewProjectUrl();
+                break;
+            case R.id.rl_open_refresh_service:
+                mSwitchOpenRefresh.setChecked(!mSwitchOpenRefresh.isChecked());
+                GDUTApplication.isOpenRefreshService = mSwitchOpenRefresh.isChecked();
                 break;
         }
     }

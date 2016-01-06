@@ -12,6 +12,7 @@ public class GDUTApplication extends Application {
     public static String stuName;
     public static String stuNameEncode;
     public static boolean isRemember;
+    public static boolean isOpenRefreshService = true;
     public static boolean hasLogin = false;
 
     @Override
@@ -25,6 +26,7 @@ public class GDUTApplication extends Application {
         stuPsw = sp.getString("student_password", null);
         stuName = sp.getString("student_name", null);
         isRemember = sp.getBoolean("is_remember", false);
+        isOpenRefreshService = sp.getBoolean("is_open_refresh_service",false);
     }
 
     public static void saveSettings() {
@@ -33,6 +35,7 @@ public class GDUTApplication extends Application {
             editor.putString("student_number", stuNum);
             editor.putString("student_password", stuPsw);
             editor.putBoolean("is_remember", isRemember);
+            editor.putBoolean("is_open_refresh_service",isOpenRefreshService);
         } else {
             editor.clear();
         }
