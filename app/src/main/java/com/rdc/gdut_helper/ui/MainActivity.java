@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends ToolbarActivity implements View.OnClickListener {
 
@@ -105,7 +106,7 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
         if (mMenuItem != null) {
             mMenuItem.setTitle(hasLogin() ? R.string.has_login : R.string.has_not_login);
         }
-        if(hasLogin()) {
+        if (hasLogin()) {
             mTvName.setText(GDUTApplication.stuName);
             mTvStuNum.setText(GDUTApplication.stuNum);
             loadPhoto(ConnectConfig.HOST + ConnectConfig.PersonalInfo.PATH_IMAGE);

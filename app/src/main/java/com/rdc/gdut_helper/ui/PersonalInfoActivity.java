@@ -3,6 +3,7 @@ package com.rdc.gdut_helper.ui;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -246,5 +247,6 @@ public class PersonalInfoActivity extends ToolbarActivity implements View.OnClic
     }
 
     private void submit() {
+        SnackbarUtil.show(this,findViewById(android.R.id.content),"此功能尚未实现", Snackbar.LENGTH_SHORT);
     }
 }

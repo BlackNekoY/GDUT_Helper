@@ -8,7 +8,7 @@
     <string name="github_project">Github开源项目</string>
     <string name="project_url">https://github.com/BlackNekoY/GDUT_Helper</string>
     <string name="open_source">开源项目许可协议</string>
-    <string name="developer">广东工业大学RDC@徐越</string>
+    <string name="developer">开发人员</string>
     <string name="action_settings">设置</string>
     <string name="settings">设置</string>
     <string name="cancel">取消</string>
@@ -23,6 +23,9 @@
     <string name="done">完成</string>
     <string name="constant_msg">固定信息</string>
     <string name="changeable_msg">可修改信息</string>
+    <string name="open_refresh_service">定时刷新</string>
+    <string name="refresh_service_desc">刷新首页防止登录状态脱离</string>
+    <string name="xuyue">计算机科学研发中心 徐越</string>
 
     <string-array name="year_array">
         <item>学年</item>
@@ -41,6 +44,7 @@
         <item>2013-2014</item>
         <item>2014-2015</item>
         <item>2015-2016</item>
+        <item>2016-2017</item>
     </string-array>
 
     <string-array name="term_array">
